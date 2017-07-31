@@ -36,13 +36,10 @@ namespace beast {
 class xxhasher
 {
 private:
-    // requires 64-bit std::size_t
-    static_assert(sizeof(std::size_t)==8, "");
-
     detail::XXH64_state_t state_;
 
 public:
-    using result_type = std::size_t;
+    using result_type = std::uint64_t;
 
     static beast::endian const endian = beast::endian::native;
 
@@ -75,7 +72,7 @@ public:
     }
 
     explicit
-    operator std::size_t() noexcept
+    operator std::uint64_t() noexcept
     {
         return detail::XXH64_digest(&state_);
     }
